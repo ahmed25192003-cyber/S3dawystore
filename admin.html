@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>لوحة تحكم S3dawy Store | Admin</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    body { font-family: 'Cairo', sans-serif; background: #07070d; color: #f8fafc; }
+    .font-orbitron { font-family: 'Orbitron', sans-serif; }
+  </style>
+</head>
+<body class="min-h-screen p-4 md:p-8">
+
+  <!-- شاشة تسجيل الدخول -->
+  <div id="loginBox" class="max-w-md mx-auto mt-20 bg-[#0d0d16] border border-cyan-400/30 rounded-2xl p-6 shadow-2xl">
+    <div class="text-center mb-6">
+      <div class="font-orbitron text-2xl font-black text-cyan-400">S3DAWY ADMIN</div>
+      <p class="text-gray-400 text-sm mt-1">لوحة إدارة المنتجات والخصومات</p>
+    </div>
+    <form onsubmit="handleLogin(event)" class="space-y-4">
+      <div>
+        <label class="text-xs text-gray-300 block mb-1">كلمة المرور الخاصة بك</label>
+        <input type="password" id="adminPass" required placeholder="أدخل الباسورد..."
+               class="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-white focus:border-cyan-400 outline-none">
+      </div>
+      <p id="loginErr" class="text-rose-400 text-xs hidden">كلمة المرور غير صحيحة!</p>
+      <button type="submit" class="w-full py-3 rounded-xl font-bold bg-cyan-400 text-black hover:bg-cyan-300 transition">
+        دخول للوحة التحكم
+      </button>
+    </form>
+  </div>
+
+  <!-- لوحة التحكم الرئيسية -->
+  <div id="dashboard" class="hidden max-w-6xl mx-auto">
+    <div class="flex flex-wrap items-center justify-between gap-4 pb-6 mb-6 border-b border-white/10">
+      <div>
+        <h1 class="font-orbitron text-2xl font-black text-cyan-400">S3DAWY STORE — ADMIN</h1>
+        <p id="dbBadge" class="text-xs text-emerald-400 mt-1"><i class="fa-solid fa-circle-check ml-1"></i> جاري الاتصال بقاعدة البيانات...</p>
+      </div>
+      <div class="flex gap-2">
+        <a href="index.html" target="_blank" class="px-4 py-2 rounded-xl bg-white/5 border border-white/15 text-sm hover:border-cyan-400">
+          <i class="fa-solid fa-eye ml-1"></i> معاينة المتجر
+        </a>
+        <button onclick="logout()" class="px-4 py-2 rounded-xl bg-rose-500/15 border border-rose-500/30 text-rose-400 text-sm">
+          خروج
+        </button>
+      </div>
+    </div>
+
+    <div class="grid lg:grid-cols-5 gap-6">
+      <!-- نموذج إضافة / تعديل منتج -->
+      <div class="lg:col-span-2 bg-[#0d0d16] border border-white/10 rounded-2xl p-5 h-fit">
+        <h2 id="formHeading" class="font-bold text-lg text-white mb-4 flex items-center gap-2">
+          <i class="fa-solid fa-plus-circle text-cyan-400"></i> إضافة منتج جديد
+        </h2>
+
+        <form id="productForm" onsubmit="saveProduct(event)" class="space-y-3.5 text-sm">
+          <input type="hidden" id="editId">
+
+          <div>
+            <label class="text-xs text-gray-400 block mb-1">اسم المنتج *</label>
+            <input type="text" id="pName" required placeholder="مثال: باور بانك 20000mAh شحن سريع"
+                   class="w-full bg-white/5 border border-white/15 rounded-xl px-3.5 py-2.5 text-white outline-none focus:border-cyan-400">
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="text-xs text-gray-400 block mb-1">القسم *</label>
+              <select id="pCat" class="w-full bg-[#13131f] border border-white/15 rounded-xl px-3 py-2.5 text-white outline-none">
+                <option value="cases">كفرات وحماية</option>
+                <option value="power">شواحن وباور بانك</option>
+                <option value="audio">سماعات وصوتيات</option>
+                <option value="gaming">جيمينغ وإكسسوار</option>
+              </select>
+            </div>
+            <div>
+              <label class="text-xs text-gray-400 block mb-1">شارة مميزة</label>
+              <input type="text" id="pBadge" placeholder="مثال: جديد / الأكثر مبيعاً"
+                     class="w-full bg-white/5 border border-white/15 rounded-xl px-3.5 py-2.5 text-white outline-none">
+            </div>
+          </div>
+
+          <!-- السعر والخصم -->
+          <div class="grid grid-cols-2 gap-3 p-3 rounded-xl bg-white/[0.03] border border-white/10">
+            <div>
+              <label class="text-xs text-cyan-400 font-bold block mb-1">السعر الحالي (ج.م) *</label>
+              <input type="number" id="pPrice" required min="1" oninput="calcDiscountPreview()" placeholder="450"
+                     class="w-full bg-black/40 border border-cyan-400/40 rounded-lg px-3 py-2 text-white outline-none">
+            </div>
+            <div>
+              <label class="text-xs text-gray-400 block mb-1">السعر قبل الخصم (اختياري)</label>
+              <input type="number" id="pOldPrice" min="0" oninput="calcDiscountPreview()" placeholder="600"
+                     class="w-full bg-black/40 border border-white/15 rounded-lg px-3 py-2 text-white outline-none">
+            </div>
+            <div id="discountPreview" class="col-span-2 text-xs text-fuchsia-400 font-bold hidden"></div>
+          </div>
+
+          <!-- رفع صورة من الجهاز أو رابط -->
+          <div>
+            <label class="text-xs text-gray-400 block mb-1">صورة المنتج (ارفع من جهازك أو ضع رابط) *</label>
+            <input type="file" id="pFile" accept="image/*" onchange="handleImageUpload(event)"
+                   class="w-full text-xs text-gray-300 file:ml-3 file:py-2 file:px-3 file:rounded-lg file:border-0 file:bg-cyan-400/20 file:text-cyan-300 hover:file:bg-cyan-400/30 cursor-pointer mb-2">
+            <input type="text" id="pImg" required placeholder="أو الصق رابط الصورة هنا https://..."
+                   class="w-full bg-white/5 border border-white/15 rounded-xl px-3.5 py-2 text-xs text-white outline-none">
+            <img id="imgPreview" class="hidden mt-2 w-full h-32 object-cover rounded-xl border border-white/15">
+          </div>
+
+          <div>
+            <label class="text-xs text-gray-400 block mb-1">وصف المنتج *</label>
+            <textarea id="pDesc" rows="2" required placeholder="اكتب مواصفات ومميزات المنتج..."
+                      class="w-full bg-white/5 border border-white/15 rounded-xl px-3.5 py-2 text-white outline-none"></textarea>
+          </div>
+
+          <div class="flex gap-2 pt-2">
+            <button type="submit" id="submitBtn" class="flex-1 py-3 rounded-xl font-bold bg-cyan-400 text-black hover:bg-cyan-300 transition">
+              <i class="fa-solid fa-cloud-arrow-up ml-1"></i> نشر في المتجر
+            </button>
+            <button type="button" id="cancelEditBtn" onclick="resetForm()" class="hidden px-4 py-3 rounded-xl bg-white/10 text-gray-300">
+              إلغاء
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- قائمة المنتجات الحالية -->
+      <div class="lg:col-span-3 bg-[#0d0d16] border border-white/10 rounded-2xl p-5">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="font-bold text-lg">المنتجات المعروضة في المتجر (<span id="countSpan">0</span>)</h2>
+        </div>
+        <div id="adminProductsList" class="space-y-3 max-h-[650px] overflow-y-auto pl-1"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase SDK -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getFirestore, collection, addDoc, updateDoc, deleteDoc, doc, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDJiBmLYXDrz7Z_4wALoOkL6xTKGB7cyz0",
+      authDomain: "s3dawystore-9c302.firebaseapp.com",
+      projectId: "s3dawystore-9c302",
+      storageBucket: "s3dawystore-9c302.firebasestorage.app",
+      messagingSenderId: "36141086837",
+      appId: "1:36141086837:web:77714a72938cb22b48a03c",
+      measurementId: "G-XTWKMGWYS7"
+    };
+
+    const ADMIN_PASSWORD = "s3dawy2026";
+    let db = null;
+    let products = [];
+
+    window.handleLogin = (e) => {
+      e.preventDefault();
+      const pass = document.getElementById('adminPass').value;
+      if (pass === ADMIN_PASSWORD) {
+        sessionStorage.setItem('s3dawy_admin_auth', '1');
+        showDashboard();
+      } else {
+        document.getElementById('loginErr').classList.remove('hidden');
+      }
+    };
+
+    window.logout = () => {
+      sessionStorage.removeItem('s3dawy_admin_auth');
+      location.reload();
+    };
+
+    function showDashboard() {
+      document.getElementById('loginBox').classList.add('hidden');
+      document.getElementById('dashboard').classList.remove('hidden');
+      initData();
+    }
+
+    if (sessionStorage.getItem('s3dawy_admin_auth') === '1') showDashboard();
+
+    window.handleImageUpload = (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          const maxW = 600;
+          const scale = Math.min(1, maxW / img.width);
+          canvas.width = img.width * scale;
+          canvas.height = img.height * scale;
+          canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+          const compressed = canvas.toDataURL('image/jpeg', 0.78);
+          document.getElementById('pImg').value = compressed;
+          const prev = document.getElementById('imgPreview');
+          prev.src = compressed;
+          prev.classList.remove('hidden');
+        };
+        img.src = ev.target.result;
+      };
+      reader.readAsDataURL(file);
+    };
+
+    window.calcDiscountPreview = () => {
+      const price = Number(document.getElementById('pPrice').value);
+      const oldPrice = Number(document.getElementById('pOldPrice').value);
+      const el = document.getElementById('discountPreview');
+      if (oldPrice > price && price > 0) {
+        const pct = Math.round(((oldPrice - price) / oldPrice) * 100);
+        el.textContent = `🔥 سيظهر للمشتري: خصم ${pct}% (توفير ${oldPrice - price} ج.م)`;
+        el.classList.remove('hidden');
+      } else {
+        el.classList.add('hidden');
+      }
+    };
+
+    function initData() {
+      const app = initializeApp(firebaseConfig);
+      db = getFirestore(app);
+      document.getElementById('dbBadge').innerHTML = '<i class="fa-solid fa-cloud text-cyan-400 ml-1"></i> متصل بمشروع s3dawystore-9c302 (بث مباشر للمتجر)';
+      const q = query(collection(db, "products"), orderBy("createdAt", "desc"));
+      onSnapshot(q, (snap) => {
+        products = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+        renderList();
+      }, (err) => {
+        document.getElementById('dbBadge').innerHTML = '<i class="fa-solid fa-triangle-exclamation text-rose-400 ml-1"></i> تأكد من تفعيل Firestore Database في وضع Test Mode';
+        console.error(err);
+      });
+    }
+
+    window.saveProduct = async (e) => {
+      e.preventDefault();
+      const editId = document.getElementById('editId').value;
+      const price = Number(document.getElementById('pPrice').value);
+      const oldPrice = Number(document.getElementById('pOldPrice').value) || null;
+
+      const data = {
+        name: document.getElementById('pName').value.trim(),
+        category: document.getElementById('pCat').value,
+        badge: document.getElementById('pBadge').value.trim(),
+        price,
+        oldPrice: (oldPrice && oldPrice > price) ? oldPrice : null,
+        image: document.getElementById('pImg').value.trim(),
+        desc: document.getElementById('pDesc').value.trim(),
+        createdAt: Date.now()
+      };
+
+      try {
+        if (editId) {
+          await updateDoc(doc(db, "products", editId), data);
+        } else {
+          await addDoc(collection(db, "products"), data);
+        }
+        resetForm();
+        alert('تم حفظ المنتج ونشره في المتجر بنجاح!');
+      } catch (err) {
+        alert('حصل خطأ في الحفظ! تأكد من تفعيل Firestore Database في وضع Test mode.');
+        console.error(err);
+      }
+    };
+
+    window.editProduct = (id) => {
+      const p = products.find(x => String(x.id) === String(id));
+      if (!p) return;
+      document.getElementById('editId').value = p.id;
+      document.getElementById('pName').value = p.name;
+      document.getElementById('pCat').value = p.category;
+      document.getElementById('pBadge').value = p.badge || '';
+      document.getElementById('pPrice').value = p.price;
+      document.getElementById('pOldPrice').value = p.oldPrice || '';
+      document.getElementById('pImg').value = p.image;
+      document.getElementById('pDesc').value = p.desc;
+      document.getElementById('formHeading').innerHTML = '<i class="fa-solid fa-pen text-amber-400"></i> تعديل المنتج';
+      document.getElementById('submitBtn').innerHTML = 'حفظ التعديلات';
+      document.getElementById('cancelEditBtn').classList.remove('hidden');
+      calcDiscountPreview();
+    };
+
+    window.deleteProduct = async (id) => {
+      if (!confirm('متأكد إنك عايز تمسح المنتج ده من المتجر؟')) return;
+      await deleteDoc(doc(db, "products", id));
+    };
+
+    window.resetForm = () => {
+      document.getElementById('productForm').reset();
+      document.getElementById('editId').value = '';
+      document.getElementById('imgPreview').classList.add('hidden');
+      document.getElementById('discountPreview').classList.add('hidden');
+      document.getElementById('formHeading').innerHTML = '<i class="fa-solid fa-plus-circle text-cyan-400"></i> إضافة منتج جديد';
+      document.getElementById('submitBtn').innerHTML = '<i class="fa-solid fa-cloud-arrow-up ml-1"></i> نشر في المتجر';
+      document.getElementById('cancelEditBtn').classList.add('hidden');
+    };
+
+    function renderList() {
+      document.getElementById('countSpan').textContent = products.length;
+      const container = document.getElementById('adminProductsList');
+      if (!products.length) {
+        container.innerHTML = '<p class="text-gray-500 text-sm text-center py-8">لسه مفيش منتجات مضافة من لوحة التحكم.. أضف أول منتج من اليمين!</p>';
+        return;
+      }
+      container.innerHTML = products.map(p => {
+        const discount = (p.oldPrice && p.oldPrice > p.price) ? Math.round(((p.oldPrice - p.price) / p.oldPrice) * 100) : 0;
+        return `
+          <div class="flex items-center gap-3 p-3 rounded-xl bg-white/[0.03] border border-white/10">
+            <img src="${p.image}" class="w-16 h-16 rounded-lg object-cover shrink-0">
+            <div class="flex-1 min-w-0">
+              <div class="font-bold text-sm truncate">${p.name}</div>
+              <div class="flex items-center gap-2 mt-1 text-xs">
+                <span class="text-cyan-400 font-bold">${p.price} ج.م</span>
+                ${discount ? `<span class="text-gray-500 line-through">${p.oldPrice} ج.م</span><span class="px-1.5 py-0.5 rounded bg-fuchsia-500/20 text-fuchsia-300 font-bold">خصم ${discount}%</span>` : ''}
+              </div>
+            </div>
+            <div class="flex gap-1.5">
+              <button onclick="editProduct('${p.id}')" class="w-9 h-9 rounded-lg bg-amber-400/15 text-amber-300 hover:bg-amber-400/25"><i class="fa-solid fa-pen"></i></button>
+              <button onclick="deleteProduct('${p.id}')" class="w-9 h-9 rounded-lg bg-rose-500/15 text-rose-400 hover:bg-rose-500/25"><i class="fa-solid fa-trash"></i></button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+  </script>
+</body>
+</html>

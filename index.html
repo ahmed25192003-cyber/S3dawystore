@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>S3dawy Store | إكسسوارات موبايل نيون</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    :root {
+      --neon-main: #00f3ff;
+      --neon-sec: #ff00ea;
+      --neon-glow: rgba(0, 243, 255, 0.45);
+      --neon-sec-glow: rgba(255, 0, 234, 0.35);
+    }
+
+    body {
+      font-family: 'Cairo', sans-serif;
+      background-color: #05050a;
+      color: #f8fafc;
+      overflow-x: hidden;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    .font-orbitron { font-family: 'Orbitron', sans-serif; }
+
+    .neon-logo {
+      color: var(--neon-main);
+      text-shadow: 0 0 8px var(--neon-main), 0 0 22px var(--neon-glow), 0 0 42px var(--neon-glow);
+      animation: flicker 4s infinite alternate;
+    }
+
+    @keyframes flicker {
+      0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
+      20%, 24%, 55% { opacity: 0.78; }
+    }
+
+    .neon-card {
+      background: rgba(13, 13, 24, 0.88);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(12px);
+      transition: all 0.3s ease;
+    }
+
+    .neon-card:hover {
+      border-color: var(--neon-main);
+      box-shadow: 0 0 25px var(--neon-glow), inset 0 0 12px rgba(255,255,255,0.03);
+      transform: translateY(-4px);
+    }
+
+    .neon-btn {
+      background: linear-gradient(135deg, var(--neon-main), var(--neon-sec));
+      color: #05050a;
+      font-weight: 900;
+      box-shadow: 0 0 20px var(--neon-glow);
+      transition: all 0.25s ease;
+    }
+
+    .neon-btn:hover {
+      box-shadow: 0 0 32px var(--neon-glow), 0 0 18px var(--neon-sec-glow);
+      transform: scale(1.02);
+    }
+
+    .neon-outline-btn {
+      border: 1.5px solid var(--neon-main);
+      color: var(--neon-main);
+      box-shadow: 0 0 12px var(--neon-glow), inset 0 0 8px var(--neon-glow);
+      transition: all 0.25s ease;
+    }
+
+    .neon-outline-btn:hover {
+      background: var(--neon-main);
+      color: #05050a;
+      box-shadow: 0 0 26px var(--neon-glow);
+    }
+
+    .neon-badge {
+      border: 1px solid var(--neon-main);
+      color: var(--neon-main);
+      box-shadow: 0 0 12px var(--neon-glow);
+      background: rgba(5, 5, 10, 0.8);
+    }
+
+    @keyframes floatPhone {
+      0%, 100% { transform: translateY(0px) rotate(-2deg); }
+      50% { transform: translateY(-12px) rotate(1deg); }
+    }
+
+    .floating-gadget {
+      animation: floatPhone 4.5s ease-in-out infinite;
+    }
+
+    ::-webkit-scrollbar { width: 7px; }
+    ::-webkit-scrollbar-track { background: #05050a; }
+    ::-webkit-scrollbar-thumb { background: var(--neon-main); border-radius: 99px; }
+  </style>
+</head>
+<body class="min-h-screen">
+
+  <!-- شريط علوي -->
+  <div class="bg-[#0b0b14] border-b border-white/10 py-2 px-3 text-center text-[11px] sm:text-xs font-bold text-gray-300">
+    ⚡ شحن سريع لجميع المحافظات | الدفع عند الاستلام | اطلب واتساب: 
+    <span style="color: var(--neon-main);" class="font-orbitron tracking-wider mr-1">01026762160</span>
+  </div>
+
+  <!-- الهيدر (مظبوط للموبايل والكمبيوتر مع ظهور أزرار الثيمات) -->
+  <header class="sticky top-0 z-40 bg-[#05050a]/90 backdrop-blur-xl border-b border-white/10 px-3 sm:px-6 py-3">
+    <div class="max-w-7xl mx-auto flex items-center justify-between gap-2">
+      
+      <!-- اللوجو -->
+      <a href="#" class="flex items-center gap-2 shrink-0">
+        <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-xl flex items-center justify-center font-orbitron font-black text-base sm:text-xl bg-black border-2"
+             style="border-color: var(--neon-main); color: var(--neon-main); box-shadow: 0 0 15px var(--neon-glow);">
+          S3
+        </div>
+        <div>
+          <div class="font-orbitron font-black text-sm sm:text-xl tracking-wider neon-logo leading-none">S3DAWY</div>
+          <div class="font-orbitron text-[9px] sm:text-[11px] text-gray-400 tracking-[0.25em] mt-0.5">STORE</div>
+        </div>
+      </a>
+
+      <!-- أزرار تغيير ألوان النيون (ظاهرة على الموبايل والكمبيوتر) -->
+      <div class="flex items-center gap-1.5 sm:gap-2 bg-white/[0.04] border border-white/15 px-2.5 py-1.5 rounded-full">
+        <span class="text-[10px] text-gray-400 hidden md:inline ml-1">إضاءة النيون:</span>
+        <button onclick="setNeonTheme('#00f3ff', '#ff00ea', 'rgba(0,243,255,0.45)', 'rgba(255,0,234,0.35)')" title="سيان × ماجنتا"
+                class="w-5 h-5 sm:w-6 sm:h-6 rounded-full border-2 border-white/40 hover:scale-110 transition"
+                style="background: linear-gradient(135deg, #00f3ff, #ff00ea); box-shadow: 0 0 10px #00f3ff;"></button>
+        <button onclick="setNeonTheme('#39ff14', '#00f3ff', 'rgba(57,255,20,0.45)', 'rgba(0,243,255,0.35)')" title="أخضر ليموني نيون"
+                class="w-5 h-5 sm:w-6 sm:h-6 rounded-full border-2 border-white/40 hover:scale-110 transition"
+                style="background: linear-gradient(135deg, #39ff14, #00f3ff); box-shadow: 0 0 10px #39ff14;"></button>
+        <button onclick="setNeonTheme('#ff00ea', '#7000ff', 'rgba(255,0,234,0.45)', 'rgba(112,0,255,0.35)')" title="سايبر بنفسجي"
+                class="w-5 h-5 sm:w-6 sm:h-6 rounded-full border-2 border-white/40 hover:scale-110 transition"
+                style="background: linear-gradient(135deg, #ff00ea, #7000ff); box-shadow: 0 0 10px #ff00ea;"></button>
+        <button onclick="setNeonTheme('#ff6b00', '#ff0055', 'rgba(255,107,0,0.45)', 'rgba(255,0,85,0.35)')" title="برتقالي كهربائي"
+                class="w-5 h-5 sm:w-6 sm:h-6 rounded-full border-2 border-white/40 hover:scale-110 transition"
+                style="background: linear-gradient(135deg, #ff6b00, #ff0055); box-shadow: 0 0 10px #ff6b00;"></button>
+      </div>
+
+      <!-- السلة -->
+      <button onclick="toggleCart()" class="relative px-3 py-2 rounded-xl bg-white/5 border hover:border-white/40 transition flex items-center gap-2 shrink-0"
+              style="border-color: var(--neon-main); box-shadow: 0 0 12px var(--neon-glow);">
+        <i class="fa-solid fa-bag-shopping text-base sm:text-lg" style="color: var(--neon-main);"></i>
+        <span class="text-xs font-bold hidden sm:inline">السلة</span>
+        <span id="cartBadge" class="w-5 h-5 rounded-full text-[11px] font-black flex items-center justify-center text-black"
+              style="background: var(--neon-main);">0</span>
+      </button>
+
+    </div>
+  </header>
+
+  <!-- الهيرو (الواجهة النيون السايبربانك) -->
+  <section class="relative max-w-7xl mx-auto px-4 pt-10 pb-14 md:py-20">
+    <!-- إضاءات خلفية نيون -->
+    <div class="absolute top-10 right-10 w-64 h-64 rounded-full blur-[130px] opacity-30 pointer-events-none" style="background: var(--neon-main);"></div>
+    <div class="absolute bottom-5 left-10 w-64 h-64 rounded-full blur-[130px] opacity-25 pointer-events-none" style="background: var(--neon-sec);"></div>
+
+    <div class="grid lg:grid-cols-12 gap-10 items-center">
+      <!-- النص والأزرار -->
+      <div class="lg:col-span-7 text-center lg:text-right">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full neon-badge text-xs font-bold mb-5">
+          <span class="w-2 h-2 rounded-full animate-ping" style="background: var(--neon-main);"></span>
+          CYBER MOBILE ACCESSORIES • 2026
+        </div>
+
+        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black leading-tight mb-5">
+          أنور موبايلك بستايل
+          <span class="block mt-1 neon-logo font-orbitron">S3DAWY NEON</span>
+        </h1>
+
+        <p class="text-gray-400 text-sm sm:text-base max-w-xl mx-auto lg:mx-0 mb-8 leading-relaxed">
+          أقوى كفرات حماية، شواحن فائقة السرعة، سماعات جيمينغ، وإكسسوارات بتصميمات مضيئة تخلي موبايلك قطعة فنية مختلفة عن الكل.
+        </p>
+
+        <div class="flex flex-wrap items-center justify-center lg:justify-start gap-3.5">
+          <a href="#shop" class="px-7 py-3.5 rounded-2xl neon-btn text-sm flex items-center gap-2">
+            <i class="fa-solid fa-bolt"></i> اكتشف الإكسسوارات
+          </a>
+          <a href="https://wa.me/201026762160?text=مرحباً%20S3dawy%20Store،%20عايز%20أستفسر%20عن%20المنتجات" target="_blank"
+             class="px-7 py-3.5 rounded-2xl neon-outline-btn text-sm font-bold flex items-center gap-2 bg-black/50">
+            <i class="fa-brands fa-whatsapp text-lg"></i> اطلب واتساب مباشر
+          </a>
+        </div>
+      </div>
+
+      <!-- بطاقة عرض نيون تفاعلية -->
+      <div class="lg:col-span-5 flex justify-center">
+        <div class="floating-gadget relative w-full max-w-sm rounded-3xl p-6 neon-card border-2"
+             style="border-color: var(--neon-main); box-shadow: 0 0 35px var(--neon-glow), inset 0 0 20px var(--neon-glow);">
+          <div class="flex items-center justify-between mb-4">
+            <span class="px-3 py-1 rounded-full text-[11px] font-black text-black" style="background: var(--neon-main);">FLASH OFFER ⚡</span>
+            <span id="flashTimer" class="font-orbitron text-xs font-bold px-3 py-1 rounded-lg bg-black/70 border border-white/15" style="color: var(--neon-sec);">04:59:59</span>
+          </div>
+          <img src="https://images.unsplash.com/photo-1609592424104-12d463b7e192?w=600" alt="Neon Setup"
+               class="w-full h-48 object-cover rounded-2xl mb-4 border border-white/15">
+          <h3 class="font-bold text-lg text-white mb-1">باكيدج السايبر المتكامل</h3>
+          <p class="text-xs text-gray-400 mb-4">باور بانك 20000mAh + كابل RGB مضيء + كفر MagSafe</p>
+          <div class="flex items-center justify-between">
+            <div>
+              <span class="font-orbitron text-xl font-black" style="color: var(--neon-main);">899 ج.م</span>
+              <span class="text-xs text-gray-500 line-through mr-2">1250 ج.م</span>
+            </div>
+            <a href="https://wa.me/201026762160?text=مرحباً%20S3dawy%20Store،%20أريد%20طلب%20باكيدج%20السايبر%20المتكامل%20بسعر%20899%20ج.م" target="_blank"
+               class="px-4 py-2 rounded-xl neon-btn text-xs">
+              احجز العرض
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- قسم المنتجات والكتالوج -->
+  <main id="shop" class="max-w-7xl mx-auto px-4 py-8">
+    
+    <!-- شريط الأقسام والبحث -->
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-8 pb-4 border-b border-white/10">
+      <div class="flex items-center gap-2 overflow-x-auto w-full md:w-auto pb-2 md:pb-0">
+        <button onclick="filterCat('all', this)" class="cat-btn px-4 py-2 rounded-xl text-xs font-bold transition whitespace-nowrap neon-btn">الكل</button>
+        <button onclick="filterCat('cases', this)" class="cat-btn px-4 py-2 rounded-xl text-xs font-bold bg-white/5 border border-white/10 text-gray-300 hover:border-white/30 transition whitespace-nowrap">كفرات وحماية</button>
+        <button onclick="filterCat('power', this)" class="cat-btn px-4 py-2 rounded-xl text-xs font-bold bg-white/5 border border-white/10 text-gray-300 hover:border-white/30 transition whitespace-nowrap">شواحن وباور بانك</button>
+        <button onclick="filterCat('audio', this)" class="cat-btn px-4 py-2 rounded-xl text-xs font-bold bg-white/5 border border-white/10 text-gray-300 hover:border-white/30 transition whitespace-nowrap">سماعات وصوتيات</button>
+        <button onclick="filterCat('gaming', this)" class="cat-btn px-4 py-2 rounded-xl text-xs font-bold bg-white/5 border border-white/10 text-gray-300 hover:border-white/30 transition whitespace-nowrap">جيمينغ</button>
+      </div>
+
+      <div class="relative w-full md:w-72">
+        <input type="text" id="searchInput" oninput="searchProducts()" placeholder="ابحث عن إكسسوار..." 
+               class="w-full bg-[#0d0d18] border border-white/15 rounded-xl px-4 py-2.5 text-xs text-white outline-none focus:border-cyan-400">
+        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-gray-400 text-xs"></i>
+      </div>
+    </div>
+
+    <!-- شبكة المنتجات -->
+    <div id="productsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="col-span-full text-center py-20 text-gray-400">
+        <i class="fa-solid fa-spinner fa-spin text-3xl mb-3" style="color: var(--neon-main);"></i>
+        <p>جاري تحميل المنتجات من المتجر...</p>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- سلة المشتريات الجانبية -->
+  <div id="cartDrawer" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden">
+    <div class="absolute top-0 left-0 h-full w-full max-w-md bg-[#090912] border-r border-white/15 flex flex-col p-5 shadow-2xl">
+      
+      <div class="flex items-center justify-between pb-4 border-b border-white/10">
+        <h2 class="font-orbitron font-bold text-base flex items-center gap-2" style="color: var(--neon-main);">
+          <i class="fa-solid fa-bag-shopping"></i> سلة المشتريات
+        </h2>
+        <button onclick="toggleCart()" class="w-8 h-8 rounded-full bg-white/5 text-gray-400 hover:text-white flex items-center justify-center">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div id="cartItemsList" class="flex-1 overflow-y-auto py-4 space-y-3"></div>
+
+      <div class="pt-4 border-t border-white/10 space-y-3">
+        <div class="bg-white/[0.03] p-3 rounded-xl border border-white/10">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs text-gray-400">كود خصم إضافي:</span>
+            <span class="text-xs font-bold" style="color: var(--neon-main);">S3DAWY10</span>
+          </div>
+          <div class="flex gap-2">
+            <input type="text" id="promoInput" placeholder="اكتب S3DAWY10" class="flex-1 bg-black/50 border border-white/15 rounded-lg px-3 py-1.5 text-xs text-white outline-none">
+            <button onclick="applyPromo()" class="px-4 py-1.5 rounded-lg neon-outline-btn text-xs font-bold">تفعيل</button>
+          </div>
+        </div>
+
+        <div class="space-y-1 text-sm">
+          <div class="flex justify-between text-gray-400 text-xs">
+            <span>المجموع:</span>
+            <span id="subTotal">0 ج.م</span>
+          </div>
+          <div id="discountRow" class="flex justify-between text-xs hidden" style="color: var(--neon-sec);">
+            <span>خصم الكود (10%):</span>
+            <span id="discountVal">0 ج.م</span>
+          </div>
+          <div class="flex justify-between font-black text-base pt-1.5 border-t border-white/10">
+            <span>الإجمالي النهائي:</span>
+            <span id="finalTotal" style="color: var(--neon-main);">0 ج.م</span>
+          </div>
+        </div>
+
+        <div class="space-y-2 pt-1">
+          <input type="text" id="clientName" placeholder="اسمك بالكامل *" class="w-full bg-white/5 border border-white/15 rounded-xl px-3 py-2 text-xs text-white outline-none">
+          <input type="text" id="clientAddress" placeholder="المحافظة والعنوان بالتفصيل *" class="w-full bg-white/5 border border-white/15 rounded-xl px-3 py-2 text-xs text-white outline-none">
+        </div>
+
+        <button onclick="checkoutWhatsApp()" class="w-full py-3.5 rounded-xl neon-btn text-sm flex items-center justify-center gap-2">
+          <i class="fa-brands fa-whatsapp text-xl"></i> إرسال الأوردر عبر واتساب
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase + منطق المتجر -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getFirestore, collection, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDJiBmLYXDrz7Z_4wALoOkL6xTKGB7cyz0",
+      authDomain: "s3dawystore-9c302.firebaseapp.com",
+      projectId: "s3dawystore-9c302",
+      storageBucket: "s3dawystore-9c302.firebasestorage.app",
+      messagingSenderId: "36141086837",
+      appId: "1:36141086837:web:77714a72938cb22b48a03c",
+      measurementId: "G-XTWKMGWYS7"
+    };
+
+    const WHATSAPP_NUMBER = "201026762160";
+    let allProducts = [];
+    let cart = [];
+    let currentCategory = 'all';
+    let discountApplied = false;
+
+    const defaultProducts = [
+      { id: 'd1', name: 'كفر Cyber Neon شفاف MagSafe', category: 'cases', badge: 'الأكثر مبيعاً', price: 240, oldPrice: 320, image: 'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=600', desc: 'حماية زوايا معززة مع حلقة شحن مغناطيسية وإطار مضيء.' },
+      { id: 'd2', name: 'باور بانك 20000mAh شحن سريع 22.5W', category: 'power', badge: 'عرض نيون', price: 650, oldPrice: 850, image: 'https://images.unsplash.com/photo-1609592424104-12d463b7e192?w=600', desc: 'شاشة رقمية LED وشحن سريع لأكثر من جهاز في نفس الوقت.' },
+      { id: 'd3', name: 'سماعة جيمينغ RGB بدون تأخير صوت', category: 'audio', badge: 'جديد', price: 480, oldPrice: 600, image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600', desc: 'إضاءة نيون جانبية وعزل ضوضاء قوي مع مايك احترافي.' },
+      { id: 'd4', name: 'مبرد موبايل ماجنتيك RGB للألعاب', category: 'gaming', badge: 'برو جيمر', price: 390, oldPrice: 500, image: 'https://images.unsplash.com/photo-1593305841991-05c297ba4575?w=600', desc: 'تبريد فوري للموبايل أثناء اللعب الطويل مع إضاءة سايبر.' }
+    ];
+
+    try {
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+      const q = query(collection(db, "products"), orderBy("createdAt", "desc"));
+      onSnapshot(q, (snap) => {
+        const cloudItems = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+        allProducts = cloudItems.length ? cloudItems : defaultProducts;
+        renderProducts(allProducts);
+      }, () => {
+        allProducts = defaultProducts;
+        renderProducts(allProducts);
+      });
+    } catch (e) {
+      allProducts = defaultProducts;
+      renderProducts(allProducts);
+    }
+
+    window.renderProducts = (products) => {
+      const grid = document.getElementById('productsGrid');
+      const filtered = currentCategory === 'all' ? products : products.filter(p => p.category === currentCategory);
+      
+      if (!filtered.length) {
+        grid.innerHTML = '<div class="col-span-full text-center py-16 text-gray-400">لا توجد منتجات في هذا القسم حالياً.</div>';
+        return;
+      }
+
+      grid.innerHTML = filtered.map(p => {
+        const discount = (p.oldPrice && p.oldPrice > p.price) ? Math.round(((p.oldPrice - p.price) / p.oldPrice) * 100) : 0;
+        return `
+          <div class="neon-card rounded-2xl overflow-hidden flex flex-col">
+            <div class="relative overflow-hidden aspect-square bg-[#0b0b14]">
+              ${p.badge ? `<span class="absolute top-3 right-3 z-10 px-2.5 py-1 rounded-lg text-[11px] font-bold neon-badge">${p.badge}</span>` : ''}
+              ${discount ? `<span class="absolute top-3 left-3 z-10 px-2.5 py-1 rounded-lg text-[11px] font-black text-black" style="background: var(--neon-sec); box-shadow: 0 0 12px var(--neon-sec-glow);">خصم ${discount}%</span>` : ''}
+              <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover hover:scale-105 transition duration-500">
+            </div>
+            
+            <div class="p-4 flex-1 flex flex-col justify-between">
+              <div>
+                <h3 class="font-bold text-sm text-white line-clamp-1 mb-1">${p.name}</h3>
+                <p class="text-gray-400 text-xs line-clamp-2 mb-3">${p.desc}</p>
+              </div>
+
+              <div>
+                <div class="flex items-center gap-2 mb-3">
+                  <span class="font-orbitron font-black text-base" style="color: var(--neon-main);">${p.price} ج.م</span>
+                  ${p.oldPrice ? `<span class="text-gray-500 text-xs line-through">${p.oldPrice} ج.م</span>` : ''}
+                </div>
+
+                <div class="grid grid-cols-2 gap-2">
+                  <button onclick="addToCart('${p.id}')" class="py-2.5 rounded-xl text-xs font-bold neon-outline-btn flex items-center justify-center gap-1.5">
+                    <i class="fa-solid fa-cart-plus"></i> للسلة
+                  </button>
+                  <button onclick="buyNowWhatsApp('${p.id}')" class="py-2.5 rounded-xl text-xs font-black bg-emerald-500 text-black hover:bg-emerald-400 transition flex items-center justify-center gap-1.5 shadow-lg">
+                    <i class="fa-brands fa-whatsapp text-sm"></i> واتساب
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    };
+
+    window.filterCat = (cat, btn) => {
+      currentCategory = cat;
+      document.querySelectorAll('.cat-btn').forEach(b => {
+        b.className = "cat-btn px-4 py-2 rounded-xl text-xs font-bold bg-white/5 border border-white/10 text-gray-300 hover:border-white/30 transition whitespace-nowrap";
+      });
+      btn.className = "cat-btn px-4 py-2 rounded-xl text-xs font-bold transition whitespace-nowrap neon-btn";
+      renderProducts(allProducts);
+    };
+
+    window.searchProducts = () => {
+      const term = document.getElementById('searchInput').value.toLowerCase();
+      const filtered = allProducts.filter(p => p.name.toLowerCase().includes(term) || p.desc.toLowerCase().includes(term));
+      renderProducts(filtered);
+    };
+
+    window.toggleCart = () => document.getElementById('cartDrawer').classList.toggle('hidden');
+
+    window.addToCart = (id) => {
+      const p = allProducts.find(x => String(x.id) === String(id));
+      if (!p) return;
+      const exist = cart.find(x => String(x.id) === String(id));
+      if (exist) exist.qty += 1;
+      else cart.push({ ...p, qty: 1 });
+      updateCartUI();
+      toggleCart();
+    };
+
+    window.updateCartQty = (id, delta) => {
+      const item = cart.find(x => String(x.id) === String(id));
+      if (!item) return;
+      item.qty += delta;
+      if (item.qty <= 0) cart = cart.filter(x => String(x.id) !== String(id));
+      updateCartUI();
+    };
+
+    function updateCartUI() {
+      document.getElementById('cartBadge').textContent = cart.reduce((s, i) => s + i.qty, 0);
+      const container = document.getElementById('cartItemsList');
+      if (!cart.length) {
+        container.innerHTML = '<div class="text-center py-12 text-gray-500 text-xs">سلة المشتريات فارغة حالياً</div>';
+      } else {
+        container.innerHTML = cart.map(item => `
+          <div class="flex items-center gap-3 p-3 rounded-xl bg-white/[0.03] border border-white/10">
+            <img src="${item.image}" class="w-14 h-14 rounded-lg object-cover">
+            <div class="flex-1 min-w-0">
+              <h4 class="font-bold text-xs truncate">${item.name}</h4>
+              <div class="text-xs font-bold mt-1" style="color: var(--neon-main);">${item.price} ج.م</div>
+            </div>
+            <div class="flex items-center gap-2 bg-black/50 px-2 py-1 rounded-lg border border-white/10">
+              <button onclick="updateCartQty('${item.id}', -1)" class="text-gray-400 hover:text-white px-1">-</button>
+              <span class="text-xs font-bold">${item.qty}</span>
+              <button onclick="updateCartQty('${item.id}', 1)" class="text-gray-400 hover:text-white px-1">+</button>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      const subtotal = cart.reduce((s, i) => s + (i.price * i.qty), 0);
+      document.getElementById('subTotal').textContent = subtotal + ' ج.م';
+      let final = subtotal;
+      if (discountApplied) {
+        const disc = Math.round(subtotal * 0.1);
+        final = subtotal - disc;
+        document.getElementById('discountRow').classList.remove('hidden');
+        document.getElementById('discountVal').textContent = disc + ' ج.م';
+      } else {
+        document.getElementById('discountRow').classList.add('hidden');
+      }
+      document.getElementById('finalTotal').textContent = final + ' ج.م';
+    }
+
+    window.applyPromo = () => {
+      if (document.getElementById('promoInput').value.trim().toUpperCase() === 'S3DAWY10') {
+        discountApplied = true;
+        updateCartUI();
+        alert('تم تفعيل خصم 10% بنجاح!');
+      } else {
+        alert('كود الخصم غير صحيح!');
+      }
+    };
+
+    window.buyNowWhatsApp = (id) => {
+      const p = allProducts.find(x => String(x.id) === String(id));
+      if (!p) return;
+      const msg = `مرحباً S3dawy Store ⚡، أريد طلب المنتج:\n\n*${p.name}*\nالسعر: *${p.price} ج.م*\n\nالاسم:\nالعنوان:`;
+      window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
+    };
+
+    window.checkoutWhatsApp = () => {
+      if (!cart.length) return alert('السلة فارغة!');
+      const name = document.getElementById('clientName').value.trim();
+      const address = document.getElementById('clientAddress').value.trim();
+      if (!name || !address) return alert('اكتب اسمك وعنوانك الأول عشان نبعت الأوردر!');
+
+      const subtotal = cart.reduce((s, i) => s + (i.price * i.qty), 0);
+      const final = discountApplied ? Math.round(subtotal * 0.9) : subtotal;
+
+      let msg = `🛒 *طلب جديد من S3dawy Store*\n\n👤 الاسم: ${name}\n📍 العنوان: ${address}\n\n📦 *المنتجات:*\n`;
+      cart.forEach((item, i) => {
+        msg += `${i + 1}. ${item.name} (×${item.qty}) = ${item.price * item.qty} ج.م\n`;
+      });
+      msg += `\n💰 *الإجمالي النهائي: ${final} ج.م*`;
+      window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
+    };
+
+    window.setNeonTheme = (main, sec, glow, secGlow) => {
+      const r = document.documentElement.style;
+      r.setProperty('--neon-main', main);
+      r.setProperty('--neon-sec', sec);
+      r.setProperty('--neon-glow', glow);
+      r.setProperty('--neon-sec-glow', secGlow);
+    };
+
+    // عداد الفلاش لايف
+    let secs = 5 * 3600 - 1;
+    setInterval(() => {
+      if (secs <= 0) secs = 5 * 3600;
+      secs--;
+      const h = String(Math.floor(secs / 3600)).padStart(2, '0');
+      const m = String(Math.floor((secs % 3600) / 60)).padStart(2, '0');
+      const s = String(secs % 60).padStart(2, '0');
+      const el = document.getElementById('flashTimer');
+      if (el) el.textContent = `${h}:${m}:${s}`;
+    }, 1000);
+  </script>
+</body>
+</html>
